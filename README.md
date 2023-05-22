@@ -1,13 +1,16 @@
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.60 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.60 |
 
 ## Usage 
 
@@ -15,8 +18,7 @@ In this example we create 2 SCP policies: *dev_control_access* and *deny_all*, u
 
 ```terraform
 module "aws_organization" {
-  source  = "blablabla"
-  version = "1.0.0"
+  source  = "https://github.com/cyberlabrs/terraform-aws-organization.git"
 
   feature_set                   = "ALL"
   aws_service_access_principals = ["sso.amazonaws.com"]
@@ -87,6 +89,7 @@ module "aws_organization" {
   ]
 }
 ```
+
 
 ## Modules
 
