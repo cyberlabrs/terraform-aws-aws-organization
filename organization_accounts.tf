@@ -25,7 +25,7 @@ locals {
     for account in local.customized_accounts : {
       # generate account key by joining internal parent key and account name, it would be unique in hierarchy structure 
       # because of that, we can create two accounts with same name, in two different organization unit
-      key                        = account.parent_key != "" ? lower(join("_", [account.parent_key, account.name])) : lower(account.name),
+      key                        = account.parent_key != "" ? lower(join("_", [account.parent_key, account.name])) : try(replace(lower(account.name)," ","_"),lower(account.name)),
       name                       = account.name,
       email                      = account.email,
       parent_id                  = account.parent_id,
