@@ -1,16 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.60 |
-
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.60 |
+# AWS Organization terraform module
 
 ## Usage 
 
@@ -90,6 +79,23 @@ module "aws_organization" {
   ]
 }
 ```
+## Examples
+
+- [Complete AWS Organization](https://github.com/cyberlabrs/terraform-aws-aws-organization/tree/main/examples/complete)
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.60 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.60 |
+
 ## Modules
 
 No modules.
