@@ -3,7 +3,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.60 |
 
 ## Providers
@@ -18,7 +18,8 @@ In this example we create 2 SCP policies: *dev_control_access* and *deny_all*, u
 
 ```terraform
 module "aws_organization" {
-  source  = "https://github.com/cyberlabrs/terraform-aws-organization.git"
+  source  = "cyberlabrs/aws-organization/aws"
+  version = "1.0.0"
 
   feature_set                   = "ALL"
   aws_service_access_principals = ["sso.amazonaws.com"]
@@ -89,8 +90,6 @@ module "aws_organization" {
   ]
 }
 ```
-
-
 ## Modules
 
 No modules.
@@ -134,4 +133,12 @@ No modules.
 | <a name="output_organization_id"></a> [organization\_id](#output\_organization\_id) | Identifier of the organization |
 | <a name="output_organizational_units"></a> [organizational\_units](#output\_organizational\_units) | List of organization units which contain the root unit |
 | <a name="output_policies"></a> [policies](#output\_policies) | List of policies |
+
+## Authors
+
+Module is maintained by [Nikola Kolovic](https://github.com/nikolakolovic) with help from [CyberLab Team](https://github.com/cyberlabrs).
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/cyberlabrs/terraform-aws-aws-organization/blob/main/LICENSE) for full details.
 <!-- END_TF_DOCS -->

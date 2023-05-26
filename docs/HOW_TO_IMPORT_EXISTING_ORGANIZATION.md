@@ -8,7 +8,8 @@ Example of module inputs (we assume that you have set up the backend and the pro
 
 ```terraform
 module "aws_organization" {
-  source = "https://github.com/cyberlabrs/terraform-aws-organization.git"
+  source  = "cyberlabrs/aws-organization/aws"
+  version = "1.0.0"
 
   feature_set                   = "ALL"
   aws_service_access_principals = []
