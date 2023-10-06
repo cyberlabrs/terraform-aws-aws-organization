@@ -9,7 +9,7 @@ module "aws_organization" {
   enabled_policy_types          = ["SERVICE_CONTROL_POLICY"]
 
   # root policies
-  root_unit_policies = [ "region_control" ]
+  root_unit_policies = ["region_control"]
 
   # policies
   policies = [
@@ -48,7 +48,7 @@ module "aws_organization" {
     },
     {
       name : "SandboxOU",
-      policies : [ "deny_all" ],
+      policies : ["deny_all"],
       children : []
     }
   ]
@@ -56,7 +56,7 @@ module "aws_organization" {
   // we can define parent unit on two ways
   // the first one is by exactly parent_id which is unit ID or Root ID for the account
   // the second way is to define parent_path, this means that we will define a node in the hierarchical structure through path
-  // example1: parent_path= CoreOU/DevelopmentOU to put account in DevelopmentOU which is placed in CoreOU
+  // example1: parent_path="CoreOU/DevelopmentOU" to put account in DevelopmentOU which is placed in CoreOU
   // example2: parent_path="" or parent_id="" that means in root unit
   accounts = [
     {

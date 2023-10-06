@@ -129,7 +129,7 @@ locals {
     }
   ]
 
-  level_2_ou_outputs =var.import_mode ? [] : [
+  level_2_ou_outputs = var.import_mode ? [] : [
     for ou in local.level_2_ou_arguments :
     {
       id        = aws_organizations_organizational_unit.level_2_ous[ou.key].id,
