@@ -1,12 +1,12 @@
 locals {
   load_from_yaml = var.config_path != "" && fileexists("${path.module}/${var.config_path}") ? true : false
   config = local.load_from_yaml ? {
-    import_mode = yamldecode(file(var.config_path))["import_mode"]
-    feature_set = yamldecode(file(var.config_path))["feature_set"]
-    enabled_policy_types = tolist(yamldecode(file(var.config_path))["enabled_policy_types"])
-    aws_service_access_principals = tolist(yamldecode(file(var.config_path))["aws_service_access_principals"])
-    organizational_units = yamldecode(file(var.config_path))["organizational_units"]
-    accounts = tolist([ for a in yamldecode(file(var.config_path))["accounts"] : {
+    import_mode = try(yamldecode(file(var.config_path))["import_mode"], false)
+    feature_set = try(yamldecode(file(var.config_path))["feature_set"], "ALL")
+    enabled_policy_types = tolist(try(yamldecode(file(var.config_path))["enabled_policy_types"], []))
+    aws_service_access_principals = tolist(try(yamldecode(file(var.config_path))["aws_service_access_principals"], []))
+    organizational_units = try(yamldecode(file(var.config_path)["organizational_units"]), [])
+    accounts = tolist([ for a in try(yamldecode(file(var.config_path))["accounts"], []) : {
       name                       = a.name,
       email                      = a.email,
       parent_id                  = try(a.parent_id, null)
@@ -17,8 +17,8 @@ locals {
       iam_user_access_to_billing = try(a.iam_user_access_to_billing, null)
       policies                   = tolist(try(a.policies, null))
     } ])
-    policies = tolist(yamldecode(file(var.config_path))["policies"])
-    root_unit_policies = tolist(yamldecode(file(var.config_path))["root_unit_policies"])
+    policies = tolist(try(yamldecode(file(var.config_path))["policies"], []))
+    root_unit_policies = tolist(try(yamldecode(file(var.config_path)["root_unit_policies"]), []))
   } : {
     import_mode = var.import_mode
     feature_set = var.feature_set
