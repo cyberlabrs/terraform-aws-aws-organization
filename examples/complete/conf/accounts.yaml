@@ -1,39 +1,3 @@
-# general
-import_mode: false
-
-# aws organization
-feature_set: "ALL"
-aws_service_access_principals: [ "sso.amazonaws.com" ]
-enabled_policy_types: [ "SERVICE_CONTROL_POLICY" ]
-
-# root policies
-root_unit_policies: ["region_control"]
-
-# policies
-policies:
-  - name: "region_control"
-    template_file: "./policies/scps/scp_region_lock.json"
-  - name: "deny_all"
-    template_file: "./policies/scps/deny_all.json"
-
-# organizational units
-organizational_units:
-  - name: "CoreOU"
-    policies: []
-    children:
-      - name: "DevelopmentOU"
-        policies: ["dev_control_access"]
-        children: []
-      - name: "StageOU"
-        policies: []
-        children: []
-      - name: "ProductionOU"
-        policies: []
-        children: []
-  - name: "SandboxOU"
-    policies: [ "deny_all" ]
-    children: []
-
 # accounts
 # we can define parent unit on two ways
 # the first one is by exactly parent_id which is unit ID or Root ID for the account

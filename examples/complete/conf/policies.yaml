@@ -1,0 +1,6 @@
+# policies
+policies:
+  - name: "region_control"
+    template_file: "./policies/scps/scp_region_lock.json"
+  - name: "deny_all"
+    template_file: "./policies/scps/deny_all.json"
