@@ -1,12 +1,6 @@
 ################################################################################
 # General
 ################################################################################
-variable "config_path" {
-  description = "Path to the yaml config file."
-  type        = string
-  default     = "variables.yaml"
-}
-
 variable "import_mode" {
   description = "Whether import mode is active, if true, resources can be imported smoothly (In that case, it is not possible to create resources safely, because outputs won't have valid outputs and all resources will be created in the root unit) WARNING: use import_mode only in case when you want to import resources, after importing, set import_mode to false or remove it "
   type        = bool
