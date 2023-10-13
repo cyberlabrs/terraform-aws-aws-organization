@@ -1,5 +1,5 @@
 locals {
-  accounts = var.accounts == null ? [] : var.accounts
+  accounts = local.config.accounts == null ? [] : local.config.accounts
 
   customized_accounts = [
     for account in local.accounts : {
@@ -74,7 +74,7 @@ resource "aws_organizations_account" "account" {
 
 locals {
   # import_mode on true will set an empty output, because it is not possible to access: aws_organizations_account.account resource during import 
-  account_outputs = var.import_mode ? [] : [
+  account_outputs = local.config.import_mode ? [] : [
     for account in local.accounts_with_parrent_id_and_key :
     {
       id        = aws_organizations_account.account[account.key].id,

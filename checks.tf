@@ -23,7 +23,7 @@ check "organizational_units" {
   assert {
     condition = (
       alltrue(
-        [for level_1_ou in var.organizational_units : ( # validate level 1 
+        [for level_1_ou in local.config.organizational_units : ( # validate level 1 
           (length(level_1_ou.name) > 2 && (length(level_1_ou.children) == 0 ||
             length(level_1_ou.children) != 0 &&
             alltrue([
@@ -56,7 +56,7 @@ check "accounts" {
   assert {
     condition = (
       alltrue(
-        [for account in var.accounts : (
+        [for account in local.config.accounts : (
           (account.name != "" && account.name != null && length(account.name) > 2) &&
           (account.email != "" && account.email != null) &&
           (try(account.parent_id, null) != null || try(account.parent_path, null) != null)
@@ -70,7 +70,7 @@ check "policies" {
   assert {
     condition = (
       alltrue(
-        [for policy in var.policies : (
+        [for policy in local.config.policies : (
           (policy.name != null && length(policy.name) > 2) &&
           (policy.template_file != "" && policy.template_file != null) &&
           (try(policy.type, null) != null ? contains(["AISERVICES_OPT_OUT_POLICY", "BACKUP_POLICY", "SERVICE_CONTROL_POLICY", "TAG_POLICY"], policy.type) : true)
