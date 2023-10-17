@@ -4,7 +4,7 @@
 
 ## Usage
 
-In this example we create 2 SCP policies: _dev_control_access_ and _deny_all_, use json policy from folder: policies/scps/
+In this example we create 2 SCP policies: _dev_control_access_ and _deny_all_, use json policy from folder: `policies/scps/`
 
 ```terraform
 module "aws_organization" {
@@ -142,6 +142,7 @@ No modules.
 | <a name="output_organization_id"></a> [organization_id](#output_organization_id)                | Identifier of the organization                         |
 | <a name="output_organizational_units"></a> [organizational_units](#output_organizational_units) | List of organization units which contain the root unit |
 | <a name="output_policies"></a> [policies](#output_policies)                                     | List of policies                                       |
+| <a name="output_config"></a> [config](#output_config)                                           | All config options                                     |
 
 ## Authors
 
