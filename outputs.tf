@@ -43,7 +43,7 @@ output "policies" {
 # AWS Organization Config Outputs
 ################################################################################
 
-output "config" {
+output "configuration" {
   description = "Configuration"
   value       = local.config
 }
