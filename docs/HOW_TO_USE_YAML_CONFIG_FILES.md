@@ -1,5 +1,8 @@
 # Guide: How to use yaml config files to set variables
 
+**Warning**
+`.yaml` files take precedence over `.yml` files, and both take precedence over Terraform variables
+
 To use multiple yaml config files instead of defining all variables in Terraform:
 
 1. Create a folder named `conf` inside your module directory and relevant config files inside that folder. If you don't define some of the config files, Terraform variables will be used instead.
