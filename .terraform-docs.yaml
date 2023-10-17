@@ -1,12 +1,4 @@
-formatter: "markdown table"
-
-recursive:
-  enabled: false
-  path: modules
-
 output:
-  file: docs/terraform.md
-  mode: inject
   template: |-
     <!-- BEGIN_TF_DOCS -->
     # AWS Organization terraform module
@@ -105,26 +97,3 @@ output:
 
     Apache 2 Licensed. See [LICENSE](LICENSE) for full details.
     <!-- END_TF_DOCS -->
-
-output-values:
-  enabled: false
-  from: ""
-
-sort:
-  enabled: true
-  by: name
-
-settings:
-  anchor: true
-  color: true
-  default: true
-  description: false
-  escape: true
-  hide-empty: false
-  html: true
-  indent: 3
-  lockfile: true
-  read-comments: true
-  required: true
-  sensitive: true
-  type: true

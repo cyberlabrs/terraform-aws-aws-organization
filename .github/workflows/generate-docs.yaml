@@ -19,6 +19,4 @@ jobs:
         with:
           working-dir: .
           git-push: "true"
-          output-file: docs/terraform.md
-          output-method: inject
           config-file: ".terraform-docs.yaml"
