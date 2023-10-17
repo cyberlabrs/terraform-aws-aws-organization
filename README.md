@@ -83,8 +83,8 @@ module "aws_organization" {
 
 ## Examples
 
-- [Complete AWS Organization using yaml config files](https://github.com/cyberlabrs/terraform-aws-aws-organization/tree/main/examples/complete-with-yaml)
-- [Complete AWS Organization using Terraform variables](https://github.com/cyberlabrs/terraform-aws-aws-organization/tree/main/examples/complete-with-tf-vars)
+- [Complete AWS Organization using yaml config files](examples/complete-with-yaml)
+- [Complete AWS Organization using Terraform variables](examples/complete-with-tf-vars)
 
 ## Requirements
 
@@ -150,6 +150,6 @@ Module is maintained by [Nikola Kolovic](https://github.com/nikolakolovic) with 
 
 ## License
 
-Apache 2 Licensed. See [LICENSE](https://github.com/cyberlabrs/terraform-aws-aws-organization/blob/main/LICENSE) for full details.
+Apache 2 Licensed. See [LICENSE](LICENSE) for full details.
 
 <!-- END_TF_DOCS -->
