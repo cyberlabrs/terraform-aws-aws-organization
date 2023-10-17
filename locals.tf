@@ -1,11 +1,24 @@
 locals {
-  config_folder             = "conf"
-  general_path              = "${local.config_folder}/general.yaml"
-  aws_organization_path     = "${local.config_folder}/aws_organization.yaml"
-  policies_path             = "${local.config_folder}/policies.yaml"
-  organizational_units_path = "${local.config_folder}/organizational_units.yaml"
-  accounts_path             = "${local.config_folder}/accounts.yaml"
+  # config folder
+  config_folder = "conf"
 
+  # config paths
+  general_prepath = "${local.config_folder}/general"
+  general_path    = fileexists("${local.general_prepath}.yaml") ? "${local.general_prepath}.yaml" : fileexists("${local.general_prepath}.yml") ? "${local.general_prepath}.yml" : ""
+
+  aws_organization_prepath = "${local.config_folder}/aws_organization"
+  aws_organization_path    = fileexists("${local.aws_organization_prepath}.yaml") ? "${local.aws_organization_prepath}.yaml" : fileexists("${local.aws_organization_prepath}.yml") ? "${local.aws_organization_prepath}.yml" : ""
+
+  policies_prepath = "${local.config_folder}/policies"
+  policies_path    = fileexists("${local.policies_prepath}.yaml") ? "${local.policies_prepath}.yaml" : fileexists("${local.policies_prepath}.yml") ? "${local.policies_prepath}.yml" : ""
+
+  organizational_units_prepath = "${local.config_folder}/organizational_units"
+  organizational_units_path    = fileexists("${local.organizational_units_prepath}.yaml") ? "${local.organizational_units_prepath}.yaml" : fileexists("${local.organizational_units_prepath}.yml") ? "${local.organizational_units_prepath}.yml" : ""
+
+  accounts_prepath = "${local.config_folder}/accounts"
+  accounts_path    = fileexists("${local.accounts_prepath}.yaml") ? "${local.accounts_prepath}.yaml" : fileexists("${local.accounts_prepath}.yml") ? "${local.accounts_prepath}.yml" : ""
+
+  # import config settings
   config = {
     import_mode = try(
       yamldecode(file(local.general_path))["import_mode"],
