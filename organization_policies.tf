@@ -2,7 +2,7 @@ locals {
   policies = local.config.policies == null ? [] : local.config.policies
 
   customized_policies = [
-    for policy in local.config.policies : {
+    for policy in local.policies : {
       name          = policy.name
       template_file = policy.template_file
 
