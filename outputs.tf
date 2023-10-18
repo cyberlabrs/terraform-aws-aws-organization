@@ -40,7 +40,7 @@ output "policies" {
 }
 
 ################################################################################
-# AWS Organization Config Outputs
+# AWS Organization Configuration Outputs
 ################################################################################
 
 output "configuration" {
