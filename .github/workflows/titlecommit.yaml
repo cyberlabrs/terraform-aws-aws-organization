@@ -1,11 +1,8 @@
 name: Validate PR title and commits
 
 on:
-  pull_request_target:
-    types:
-      - opened
-      - edited
-      - synchronize
+  pull_request:
+    branches: ["*"]
 
 jobs:
   title:
