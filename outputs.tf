@@ -38,12 +38,3 @@ output "policies" {
   description = "List of policies"
   value       = local.policies_outputs
 }
-
-################################################################################
-# AWS Organization Configuration Outputs
-################################################################################
-
-output "configuration" {
-  description = "Configuration"
-  value       = local.config
-}
