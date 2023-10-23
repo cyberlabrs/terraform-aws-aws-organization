@@ -4,13 +4,11 @@ on:
   pull_request:
     branches: ["main"]
     types: ["closed"]
-    paths:
-      - "**/*.tpl"
-      - "**/*.py"
-      - "**/*.tf"
-      - "**/*.yaml"
-      - "**/*.yml"
-      - ".github/workflows/release.yaml"
+    paths-ignore:
+      - ".github"
+      - ".gitignore"
+      - ".pre-commit-config.yaml"
+      - "commitlint.config.js"
 
 jobs:
   release:
