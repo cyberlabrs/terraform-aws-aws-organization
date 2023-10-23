@@ -1,4 +1,4 @@
-name: "Validate PR title"
+name: Validate PR title and commits
 
 on:
   pull_request_target:
@@ -8,7 +8,7 @@ on:
       - synchronize
 
 jobs:
-  main:
+  title:
     name: Validate PR title
     runs-on: ubuntu-latest
     steps:
