@@ -1,4 +1,4 @@
-name: Formatting and linting
+name: Perform Terraform format, validate and lint
 
 on:
   pull_request:
