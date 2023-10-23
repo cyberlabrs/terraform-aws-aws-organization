@@ -137,7 +137,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_accounts"></a> [accounts](#output\_accounts) | List of accounts |
-| <a name="output_configuration"></a> [configuration](#output\_configuration) | Configuration |
 | <a name="output_organization_arn"></a> [organization\_arn](#output\_organization\_arn) | ARN of the organization |
 | <a name="output_organization_id"></a> [organization\_id](#output\_organization\_id) | Identifier of the organization |
 | <a name="output_organizational_units"></a> [organizational\_units](#output\_organizational\_units) | List of organization units which contain the root unit |
