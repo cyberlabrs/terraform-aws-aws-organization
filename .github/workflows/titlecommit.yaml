@@ -2,7 +2,7 @@ name: Validate PR title and commits
 
 on:
   pull_request:
-    branches: ["*"]
+    branches: ["main"]
 
 jobs:
   title:
