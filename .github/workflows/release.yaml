@@ -1,20 +1,35 @@
-name: Publish a new Github Release
+name: Release
 
 on:
-  push:
-    tags:
-      - "*"
   workflow_dispatch:
-    tags:
-      - "*"
+  push:
+    branches: ["main"]
+    paths:
+      - "**/*.tpl"
+      - "**/*.py"
+      - "**/*.tf"
+      - "**/*.yaml"
+      - "**/*.yml"
+      - ".github/workflows/release.yaml"
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    # Skip running release workflow on forks
+    if: github.repository_owner == 'cyberlabrs'
     steps:
-      - uses: actions/checkout@v4
-      - uses: ncipollo/release-action@v1
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          generateReleaseNotes: true
-          name: ${{ github.ref_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          extra_plugins: |
+            @semantic-release/changelog@6.0.0
+            @semantic-release/git@10.0.0
+            conventional-changelog-conventionalcommits@4.6.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
