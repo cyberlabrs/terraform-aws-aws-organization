@@ -2,7 +2,7 @@ name: Pre-commit
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ["*"] # should be changed to main after checking that the config is correct
 
 jobs:
   pre-commit:
