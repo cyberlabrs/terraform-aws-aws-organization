@@ -24,6 +24,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          branches: |
+            ["main"]
           ci: false # required to allow PR event trigger
           extra_plugins: |
             @semantic-release/changelog@6.0.3
