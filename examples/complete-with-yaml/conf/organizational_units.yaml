@@ -1,0 +1,17 @@
+# organizational units
+organizational_units:
+  - name: "CoreOU"
+    policies: []
+    children:
+      - name: "DevelopmentOU"
+        policies: ["dev_control_access"]
+        children: []
+      - name: "StageOU"
+        policies: []
+        children: []
+      - name: "ProductionOU"
+        policies: []
+        children: []
+  - name: "SandboxOU"
+    policies: [ "deny_all" ]
+    children: []

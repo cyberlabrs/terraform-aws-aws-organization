@@ -1,5 +1,5 @@
 locals {
-  organizational_units = var.organizational_units == null ? [] : var.organizational_units
+  organizational_units = local.config.organizational_units == null ? [] : local.config.organizational_units
 
   level_1_ou_arguments = [
     for ou in local.organizational_units : {
@@ -118,7 +118,7 @@ resource "aws_organizations_organizational_unit" "level_5_ous" {
 
 locals {
   # import_mode on true will set an empty output, because it is not possible to access: aws_organizations_organizational_unit.level_1_ous resource during import 
-  level_1_ou_outputs = var.import_mode ? [] : [
+  level_1_ou_outputs = local.config.import_mode ? [] : [
     for ou in local.level_1_ou_arguments :
     {
       id        = aws_organizations_organizational_unit.level_1_ous[ou.key].id,
@@ -129,7 +129,7 @@ locals {
     }
   ]
 
-  level_2_ou_outputs =var.import_mode ? [] : [
+  level_2_ou_outputs = local.config.import_mode ? [] : [
     for ou in local.level_2_ou_arguments :
     {
       id        = aws_organizations_organizational_unit.level_2_ous[ou.key].id,
@@ -140,7 +140,7 @@ locals {
     }
   ]
 
-  level_3_ou_outputs = var.import_mode ? [] : [
+  level_3_ou_outputs = local.config.import_mode ? [] : [
     for ou in local.level_3_ou_arguments :
     {
       id        = aws_organizations_organizational_unit.level_3_ous[ou.key].id,
@@ -151,7 +151,7 @@ locals {
     }
   ]
 
-  level_4_ou_outputs = var.import_mode ? [] : [
+  level_4_ou_outputs = local.config.import_mode ? [] : [
     for ou in local.level_4_ou_arguments :
     {
       id        = aws_organizations_organizational_unit.level_4_ous[ou.key].id,
@@ -162,7 +162,7 @@ locals {
     }
   ]
 
-  level_5_ou_outputs = var.import_mode ? [] : [
+  level_5_ou_outputs = local.config.import_mode ? [] : [
     for ou in local.level_5_ou_arguments :
     {
       id        = aws_organizations_organizational_unit.level_5_ous[ou.key].id,
