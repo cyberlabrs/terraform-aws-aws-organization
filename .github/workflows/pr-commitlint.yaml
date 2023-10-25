@@ -2,7 +2,7 @@ name: Validate PR commit messages
 
 on:
   pull_request:
-    branches: ["*"] # should be changed to main after checking that the config is correct
+    branches: ["main"]
 
 jobs:
   commitlint:
