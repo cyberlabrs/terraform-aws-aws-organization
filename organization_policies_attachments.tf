@@ -27,7 +27,7 @@ locals {
 }
 
 resource "aws_organizations_policy_attachment" "root" {
-  for_each = toset(var.root_unit_policies)
+  for_each = toset(local.config.root_unit_policies)
 
   policy_id = aws_organizations_policy.all[each.key].id
   target_id = data.aws_organizations_organization.organization.roots[0].id

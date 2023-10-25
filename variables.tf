@@ -3,8 +3,8 @@
 ################################################################################
 variable "import_mode" {
   description = "Whether import mode is active, if true, resources can be imported smoothly (In that case, it is not possible to create resources safely, because outputs won't have valid outputs and all resources will be created in the root unit) WARNING: use import_mode only in case when you want to import resources, after importing, set import_mode to false or remove it "
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 ################################################################################
@@ -108,7 +108,7 @@ variable "accounts" {
     condition = (
       alltrue(
         [for account in var.accounts : (
-          (account.name != "" && account.name != null && length(account.name)>2) &&
+          (account.name != "" && account.name != null && length(account.name) > 2) &&
           (account.email != "" && account.email != null) &&
           (try(account.parent_id, null) != null || try(account.parent_path, null) != null)
       )])
