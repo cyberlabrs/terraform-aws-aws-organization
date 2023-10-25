@@ -1,5 +1,3 @@
-<!-- BEGIN_TF_DOCS -->
-
 # AWS Organization terraform module
 
 ## Usage
@@ -8,76 +6,72 @@ In this example we create 2 SCP policies: _dev_control_access_ and _deny_all_, u
 
 ```terraform
 module "aws_organization" {
-  source  = "cyberlabrs/aws-organization/aws"
-  version = "1.0.0"
-
-  feature_set                   = "ALL"
-  aws_service_access_principals = ["sso.amazonaws.com"]
-  enabled_policy_types          = ["SERVICE_CONTROL_POLICY"]
-
-  policies = [
+    source  = "cyberlabrs/aws-organization/aws"
+    version = "1.0.0"
+    feature_set                   = "ALL"
+    aws_service_access_principals = ["sso.amazonaws.com"]
+    enabled_policy_types          = ["SERVICE_CONTROL_POLICY"]
+    policies = [
     {
-      name : "dev_control_access",
-      template_file : "./policies/scps/dev_control_access.json",
+        name : "dev_control_access",
+        template_file : "./policies/scps/dev_control_access.json",
     },
     {
-      name : "deny_all",
-      template_file : "./policies/scps/deny_all.json",
+        name : "deny_all",
+        template_file : "./policies/scps/deny_all.json",
     }
-  ]
-
-  organizational_units = [
+    ]
+    organizational_units = [
     {
-      name : "CoreOU",
-      policies : [],
-      children : [
+        name : "CoreOU",
+        policies : [],
+        children : [
         {
-          name : "DevelopmentOU",
-          policies : ["dev_control_access"],
-          children : []
+            name : "DevelopmentOU",
+            policies : ["dev_control_access"],
+            children : []
         },
         {
-          name : "StageOU",
-          policies : [],
-          children : []
+            name : "StageOU",
+            policies : [],
+            children : []
         },
         {
-          name : "ProductionOU",
-          policies : [],
-          children : []
+            name : "ProductionOU",
+            policies : [],
+            children : []
         }
-      ]
+        ]
     },
     {
-      name : "SandboxOU",
-      policies : [],
-      children : []
+        name : "SandboxOU",
+        policies : [],
+        children : []
     }
-  ]
-
-  accounts = [
+    ]
+    accounts = [
     {
-      name : "AccountInRootOU",
-      email : "test+root@test.com",
-      parent_id : "",
-      policies : ["deny_all"]
+        name : "AccountInRootOU",
+        email : "test+root@test.com",
+        parent_id : "",
+        policies : ["deny_all"]
     },
     {
-      name : "Development",
-      email : "test+dev@test.com",
-      parent_path : "CoreOU/DevelopmentOU"
+        name : "Development",
+        email : "test+dev@test.com",
+        parent_path : "CoreOU/DevelopmentOU"
     },
     {
-      name : "Stage",
-      email : "test+stage@test.com",
-      parent_path : "CoreOU/StageOU",
+        name : "Stage",
+        email : "test+stage@test.com",
+        parent_path : "CoreOU/StageOU",
     },
     {
-      name : "Pruduction",
-      email : "test+shared@test.com",
-      parent_path : "CoreOU/ProductionOU"
+        name : "Pruduction",
+        email : "test+shared@test.com",
+        parent_path : "CoreOU/ProductionOU"
     }
-  ]
+    ]
 }
 ```
 
@@ -86,12 +80,13 @@ module "aws_organization" {
 - [Complete AWS Organization using yaml config files](examples/complete-with-yaml)
 - [Complete AWS Organization using Terraform variables](examples/complete-with-tf-vars)
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name                                                                     | Version |
-| ------------------------------------------------------------------------ | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.3  |
-| <a name="requirement_aws"></a> [aws](#requirement_aws)                   | >= 4.60 |
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.60 |
 
 ## Providers
 
@@ -135,14 +130,14 @@ No modules.
 
 ## Outputs
 
-| Name                                                                                            | Description                                            |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| <a name="output_accounts"></a> [accounts](#output_accounts)                                     | List of accounts                                       |
-| <a name="output_organization_arn"></a> [organization_arn](#output_organization_arn)             | ARN of the organization                                |
-| <a name="output_organization_id"></a> [organization_id](#output_organization_id)                | Identifier of the organization                         |
-| <a name="output_organizational_units"></a> [organizational_units](#output_organizational_units) | List of organization units which contain the root unit |
-| <a name="output_policies"></a> [policies](#output_policies)                                     | List of policies                                       |
-| <a name="output_config"></a> [config](#output_config)                                           | All config options                                     |
+| Name | Description |
+|------|-------------|
+| <a name="output_accounts"></a> [accounts](#output\_accounts) | List of accounts |
+| <a name="output_organization_arn"></a> [organization\_arn](#output\_organization\_arn) | ARN of the organization |
+| <a name="output_organization_id"></a> [organization\_id](#output\_organization\_id) | Identifier of the organization |
+| <a name="output_organizational_units"></a> [organizational\_units](#output\_organizational\_units) | List of organization units which contain the root unit |
+| <a name="output_policies"></a> [policies](#output\_policies) | List of policies |
+<!-- END_TF_DOCS -->
 
 ## Authors
 
@@ -151,5 +146,3 @@ Module is maintained by [Nikola Kolovic](https://github.com/nikolakolovic) with 
 ## License
 
 Apache 2 Licensed. See [LICENSE](LICENSE) for full details.
-
-<!-- END_TF_DOCS -->
