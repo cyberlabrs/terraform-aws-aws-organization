@@ -13,6 +13,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     # Skip running release workflow on forks
+    if: github.repository_owner == 'cyberlabrs'
     steps:
       - uses: actions/checkout@v4
         with:

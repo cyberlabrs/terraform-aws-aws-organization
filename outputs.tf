@@ -38,12 +38,3 @@ output "policies" {
   description = "List of policies"
   value       = local.policies_outputs
 }
-
-################################################################################
-# TESTING
-################################################################################
-
-output "config" {
-  description = "Config"
-  value       = local.config
-}
