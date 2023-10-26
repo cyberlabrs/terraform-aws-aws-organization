@@ -1,8 +1,8 @@
 locals {
-  policies = var.policies == null ? [] : var.policies
+  policies = local.config.policies == null ? [] : local.config.policies
 
   customized_policies = [
-    for policy in var.policies : {
+    for policy in local.policies : {
       name          = policy.name
       template_file = policy.template_file
 
@@ -26,7 +26,7 @@ resource "aws_organizations_policy" "all" {
 
 locals {
   # import_mode on true will set an empty output, because it is not possible to access: aws_organizations_policy.all resource during import 
-  policies_outputs = var.import_mode ? [] : [
+  policies_outputs = local.config.import_mode ? [] : [
     for policy in local.customized_policies : {
       id   = aws_organizations_policy.all[policy.name].id,
       arn  = aws_organizations_policy.all[policy.name].arn,
