@@ -10,6 +10,11 @@ on:
       - ".pre-commit-config.yaml"
       - "commitlint.config.js"
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
