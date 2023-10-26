@@ -1,0 +1,25 @@
+name: Pre-commit and Terraform docs
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+      - uses: terraform-linters/setup-tflint@v4
+      - uses: pre-commit/action@v3.0.0
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: terraform-docs/gh-actions@v1
+        with:
+          git-push: "true"
+          git-commit-message: "chore: terraform-docs: automated action"
