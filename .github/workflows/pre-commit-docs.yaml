@@ -1,4 +1,4 @@
-name: Pre-commit
+name: Pre-commit and Terraform docs
 
 on:
   pull_request:
@@ -22,3 +22,4 @@ jobs:
       - uses: terraform-docs/gh-actions@v1
         with:
           git-push: "true"
+          git-commit-message: "chore: terraform-docs: automated action"
