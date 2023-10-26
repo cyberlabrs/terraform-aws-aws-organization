@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches: ["main"]
+    types: ["closed"]
     paths-ignore:
       - ".github"
       - ".gitignore"
@@ -13,7 +14,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     # Skip running release workflow on forks
-    if: github.repository_owner == 'cyberlabrs'
+    if: github.event.pull_request.merged == true && github.repository_owner == 'cyberlabrs'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,6 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          ci: false # required to allow running on PR merged instead of push to main
           extra_plugins: |
             @semantic-release/changelog@6.0.3
             @semantic-release/git@10.0.1
