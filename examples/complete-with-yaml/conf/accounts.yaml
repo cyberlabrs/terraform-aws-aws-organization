@@ -1,0 +1,35 @@
+# accounts
+# we can define parent unit on two ways
+# the first one is by exactly parent_id which is unit ID or Root ID for the account
+# the second way is to define parent_path, this means that we will define a node in the hierarchical structure through path
+# example1: parent_path="CoreOU/DevelopmentOU" to put account in DevelopmentOU which is placed in CoreOU
+# example2: parent_path="" or parent_id="" that means in root unit
+accounts:
+  - name: "ExampleOfAccountInRootOnit"
+    email: "test+root@test.com"
+    parent_id: ""
+  - name: "Development"
+    email: "test+dev@test.com"
+    parent_path: "CoreOU/DevelopmentOU"
+  - name: "Pruduction"
+    email: "test+shared@test.com"
+    parent_path: "CoreOU/ProductionOU"
+  - name: "Shared"
+    email: "test+shared@test.com"
+    parent_path: "CoreOU"
+  - name: "Sandbox01"
+    email: "test+sandbox01@test.com"
+    parent_path: "SandboxOU"
+  - name: "Sandbox02"
+    email: "test+sandbox01@test.com"
+    parent_path: "SandboxOU"
+  - name: "Sandbox03"
+    email: "test+sandbox01@test.com"
+    parent_path: "SandboxOU"
+  - name: "Stage"
+    email: "test+stage@test.com"
+    parent_path: "CoreOU/StageOU"
+    policies: [ "deny_all" ]
+  # - name: "AccountBYID"
+  #   email: "test+dev@test.com"
+  #   parent_id: "B1234323" # specified by concrete id, you need to know the ID of your OU or root account, this value is example only
