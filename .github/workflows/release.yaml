@@ -30,5 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           ci: false # required to allow running on PR merged instead of push to main
+          branches: |
+            ["main"]
           extra_plugins: |
             @semantic-release/changelog
