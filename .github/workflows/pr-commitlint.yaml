@@ -8,6 +8,9 @@ jobs:
   commitlint:
     name: Validate commit messages
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+
     steps:
       - uses: actions/checkout@v4
         with:
