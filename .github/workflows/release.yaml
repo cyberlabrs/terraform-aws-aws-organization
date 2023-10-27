@@ -27,7 +27,7 @@ jobs:
 
       - uses: cycjimmy/semantic-release-action@v4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         with:
           ci: false # required to allow running on PR merged instead of push to main
           branches: |
