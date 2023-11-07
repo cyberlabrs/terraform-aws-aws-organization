@@ -7,13 +7,21 @@ on:
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
       - uses: terraform-linters/setup-tflint@v4
       - uses: pre-commit/action@v3.0.0
+
   generate-docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
         with:
