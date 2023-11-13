@@ -2,76 +2,146 @@
 
 ## Usage
 
-In this example we create 2 SCP policies: _dev_control_access_ and _deny_all_, use json policy from folder: `policies/scps/`
+NEW (>=2.0.0): In this example with yaml conf we create 2 SCP policies: _dev_control_access_ and _deny_all_, use json policy from folder: `policies/scps/`
 
 ```terraform
 module "aws_organization" {
-    source  = "cyberlabrs/aws-organization/aws"
-    version = "1.0.0"
-    feature_set                   = "ALL"
-    aws_service_access_principals = ["sso.amazonaws.com"]
-    enabled_policy_types          = ["SERVICE_CONTROL_POLICY"]
-    policies = [
+  source  = "cyberlabrs/aws-organization/aws"
+  version = "2.0.0"
+
+  # variables are configured via yaml files inside "conf" folder
+}
+```
+
+```yaml
+# conf/aws_organization.yaml
+---
+# aws organization
+feature_set: "ALL"
+aws_service_access_principals: ["sso.amazonaws.com"]
+enabled_policy_types: ["SERVICE_CONTROL_POLICY"]
+```
+
+```yaml
+# conf/policies.yaml
+---
+policies:
+  - name: "dev_control_access"
+    template_file: "./policies/scps/dev_control_access.json"
+  - name: "deny_all"
+    template_file: "./policies/scps/deny_all.json"
+```
+
+```yaml
+# conf/organizational_units.yaml
+---
+organizational_units:
+  - name: "CoreOU"
+    policies: []
+    children:
+      - name: "DevelopmentOU"
+        policies: ["dev_control_access"]
+        children: []
+      - name: "StageOU"
+        policies: []
+        children: []
+      - name: "ProductionOU"
+        policies: []
+        children: []
+  - name: "SandboxOU"
+    policies: ["deny_all"]
+    children: []
+```
+
+```yaml
+# conf/accounts.yaml
+---
+accounts:
+  - name: "AccountInRootOU"
+    email: "test+root@test.com"
+    parent_id: ""
+    policies: ["deny_all"]
+  - name: "Development"
+    email: "test+dev@test.com"
+    parent_path: "CoreOU/DevelopmentOU"
+  - name: "Stage"
+    email: "test+stage@test.com"
+    parent_path: "CoreOU/StageOU"
+  - name: "Production"
+    email: "test+shared@test.com"
+    parent_path: "CoreOU/ProductionOU"
+```
+
+In this example with standard tf variables we create 2 SCP policies: _dev_control_access_ and _deny_all_, use json policy from folder: `policies/scps/`
+
+```terraform
+module "aws_organization" {
+  source                        = "cyberlabrs/aws-organization/aws"
+  version                       = "2.0.0"
+  feature_set                   = "ALL"
+  aws_service_access_principals = ["sso.amazonaws.com"]
+  enabled_policy_types          = ["SERVICE_CONTROL_POLICY"]
+  policies = [
     {
-        name : "dev_control_access",
-        template_file : "./policies/scps/dev_control_access.json",
+      name : "dev_control_access",
+      template_file : "./policies/scps/dev_control_access.json",
     },
     {
-        name : "deny_all",
-        template_file : "./policies/scps/deny_all.json",
+      name : "deny_all",
+      template_file : "./policies/scps/deny_all.json",
     }
-    ]
-    organizational_units = [
+  ]
+  organizational_units = [
     {
-        name : "CoreOU",
-        policies : [],
-        children : [
+      name : "CoreOU",
+      policies : [],
+      children : [
         {
-            name : "DevelopmentOU",
-            policies : ["dev_control_access"],
-            children : []
+          name : "DevelopmentOU",
+          policies : ["dev_control_access"],
+          children : []
         },
         {
-            name : "StageOU",
-            policies : [],
-            children : []
+          name : "StageOU",
+          policies : [],
+          children : []
         },
         {
-            name : "ProductionOU",
-            policies : [],
-            children : []
+          name : "ProductionOU",
+          policies : [],
+          children : []
         }
-        ]
+      ]
     },
     {
-        name : "SandboxOU",
-        policies : [],
-        children : []
+      name : "SandboxOU",
+      policies : [],
+      children : []
     }
-    ]
-    accounts = [
+  ]
+  accounts = [
     {
-        name : "AccountInRootOU",
-        email : "test+root@test.com",
-        parent_id : "",
-        policies : ["deny_all"]
+      name : "AccountInRootOU",
+      email : "test+root@test.com",
+      parent_id : "",
+      policies : ["deny_all"]
     },
     {
-        name : "Development",
-        email : "test+dev@test.com",
-        parent_path : "CoreOU/DevelopmentOU"
+      name : "Development",
+      email : "test+dev@test.com",
+      parent_path : "CoreOU/DevelopmentOU"
     },
     {
-        name : "Stage",
-        email : "test+stage@test.com",
-        parent_path : "CoreOU/StageOU",
+      name : "Stage",
+      email : "test+stage@test.com",
+      parent_path : "CoreOU/StageOU",
     },
     {
-        name : "Pruduction",
-        email : "test+shared@test.com",
-        parent_path : "CoreOU/ProductionOU"
+      name : "Pruduction",
+      email : "test+shared@test.com",
+      parent_path : "CoreOU/ProductionOU"
     }
-    ]
+  ]
 }
 ```
 
